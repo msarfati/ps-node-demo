@@ -1,4 +1,4 @@
-const debug = require('debug')('app');
+const debug = require('debug')('app:bookRoutes');
 const express = require('express');
 const db = require('../../db');
 
