@@ -17,3 +17,10 @@ INSERT INTO "book" ("title", "genre", "author") VALUES
     ('The Wind in the Willows','Fantasy','Kenneth Grahame'),
     ('Life On The Mississippi','History','Mark Twain'),
     ('Childhood','Biography','Lev Nikolayevich Tolstoy');
+
+DROP TABLE IF EXISTS "appuser";
+CREATE TABLE IF NOT EXISTS "appuser" (
+    "id" SERIAL PRIMARY KEY,
+    "username" VARCHAR(255),
+    "password" VARCHAR(255)
+);
