@@ -1,7 +1,7 @@
 const db = require('../../db');
 // const debug = require('debug')('app:bookController');
 
-function bookController(nav) {
+function bookController(bookService, nav) {
   function middleware(req, res, next) {
     // if (req.user) {
     //   next();
@@ -32,7 +32,7 @@ function bookController(nav) {
       'bookView',
       {
         nav,
-        book: req.result,
+        book: req.book,
         title: 'Library'
       }
     );
@@ -42,7 +42,10 @@ function bookController(nav) {
     (async function query() {
       const { id } = req.params;
       const result = await db.pgPool.query(db.queries.getBookByID, [id]);
-      [req.result] = result.rows;
+      // [req.result] = result.rows;
+      const book = result.rows[0];
+      book.details = await bookService.getBookByID(book.goodreads_id);
+      req.book = book;
       next();
     }());
   }
